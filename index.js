@@ -5,7 +5,7 @@ function Node(value, next, prev) {
   this.prev = prev;
 }
 
-function LinkedList() {
+function Main() {
   // Our "working" function - that's why there's no params passed, we work here
   this.head = null;
   this.tail = null;
@@ -13,7 +13,7 @@ function LinkedList() {
 }
 
 // Add node to the beginning of the LinkedList
-LinkedList.prototype.unshift = function(value) {
+Main.prototype.unshift = function(value) {
   const oldHead = this.head;
 
   // null for the prev argument as the head has no prev
@@ -36,7 +36,7 @@ LinkedList.prototype.unshift = function(value) {
 };
 
 // Add node to the end of the LinkedList
-LinkedList.prototype.push = function(value) {
+Main.prototype.push = function(value) {
   // Basically do the same as the unshift() but in reverse
   const oldTail = this.tail;
 
@@ -60,7 +60,7 @@ LinkedList.prototype.push = function(value) {
 };
 
 // Remove first item in the LinkedList
-LinkedList.prototype.shift = function() {
+Main.prototype.shift = function() {
   if (!this.head) {
     // If there is no head there's no reference to the first value, so just return
     return null;
@@ -87,7 +87,7 @@ LinkedList.prototype.shift = function() {
   return oldHead.value;
 };
 
-LinkedList.prototype.pop = function() {
+Main.prototype.pop = function() {
   // Same spiel as shift() method
   if (!this.tail) {
     // If there is no tail there's no reference to the last value, so just return
@@ -116,7 +116,7 @@ LinkedList.prototype.pop = function() {
 };
 
 // Return Node of the first value match
-LinkedList.prototype.getNode = function(value) {
+Main.prototype.getNode = function(value) {
   // Start at the head
   let currentNode = this.head;
 
@@ -136,7 +136,7 @@ LinkedList.prototype.getNode = function(value) {
 };
 
 // Return the index of the value in the LinkedList
-LinkedList.prototype.index = function(value) {
+Main.prototype.index = function(value) {
   // Start at the head
   let currentNode = this.head;
 
@@ -157,7 +157,7 @@ LinkedList.prototype.index = function(value) {
 };
 
 // Tests
-const newList = new LinkedList();
+const newList = new Main();
 
 newList.push(10);
 newList.pop();
