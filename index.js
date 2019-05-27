@@ -9,6 +9,7 @@ function LinkedList() {
   // Our "working" function - that's why there's no params passed, we work here
   this.head = null;
   this.tail = null;
+  this.length = 0;
 }
 
 // Add node to the beginning of the LinkedList
@@ -29,6 +30,9 @@ LinkedList.prototype.unshift = function(value) {
 
   // Finally update the head
   this.head = newNode;
+
+  // Update length
+  this.length++;
 };
 
 // Add node to the end of the LinkedList
@@ -50,6 +54,9 @@ LinkedList.prototype.push = function(value) {
 
   // Finally update the tail
   this.tail = newNode;
+
+  // Update length
+  this.length++;
 };
 
 // Remove first item in the LinkedList
@@ -73,6 +80,9 @@ LinkedList.prototype.shift = function() {
     // If the new head "doesn't exist", then it means the LinkedList is empty, so we need to update the tail as well
     this.tail = null;
   }
+
+  // Update length
+  this.length--;
 
   return oldHead.value;
 };
@@ -98,6 +108,9 @@ LinkedList.prototype.pop = function() {
     // If the new tail "doesn't exist", then it means the LinkedList is empty, so we need to update the head as well
     this.head = null;
   }
+
+  // Update length
+  this.length--;
 
   return oldTail.value;
 };
