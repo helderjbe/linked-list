@@ -17,19 +17,19 @@ Main.prototype.unshift = function(value) {
   const oldHead = this.head;
 
   // null for the prev argument as the head has no prev
-  const newNode = new Node(value, oldHead, null);
+  const newHead = new Node(value, oldHead, null);
 
   if (oldHead) {
     // Now the "old" head needs to have a previous node
-    oldHead.prev = newNode;
+    oldHead.prev = newHead;
   }
   // If the tail doesn't exist, make it the same as newHead
   if (!this.tail) {
-    this.tail = newNode;
+    this.tail = newHead;
   }
 
   // Finally update the head
-  this.head = newNode;
+  this.head = newHead;
 
   // Update length
   this.length++;
@@ -41,19 +41,19 @@ Main.prototype.push = function(value) {
   const oldTail = this.tail;
 
   // null for the next argument as the tail has no next
-  const newNode = new Node(value, null, this.tail);
+  const newTail = new Node(value, null, this.tail);
 
   if (oldTail) {
     // Now the "old" tail needs to have a next node
-    oldTail.next = newNode;
+    oldTail.next = newTail;
   }
   // If the tail doesn't exist, make it the same as newTail
   if (!this.head) {
-    this.head = newNode;
+    this.head = newTail;
   }
 
   // Finally update the tail
-  this.tail = newNode;
+  this.tail = newTail;
 
   // Update length
   this.length++;
@@ -67,17 +67,14 @@ Main.prototype.shift = function() {
   }
 
   // Capture the current head node
-  const oldHead = this.head;
+  const oldHead = Object.assign({}, this.head);
 
   // "Remove" the current head by replacing it for the next node
   this.head = this.head.next;
 
   // this.head.next can be null, and if so, this.head will also be null
-  if (this.head) {
-    // Now the new head shouldn't have a prev Node
-    this.head.prev = null;
-  } else {
-    // If the new head "doesn't exist", then it means the LinkedList is empty, so we need to update the tail as well
+  if (!this.head) {
+    // Now the new tail should also be set to null
     this.tail = null;
   }
 
@@ -95,17 +92,14 @@ Main.prototype.pop = function() {
   }
 
   // Capture the current tail node
-  const oldTail = this.tail;
+  const oldTail = Object.assign({}, this.tail);
 
   // "Remove" the current tail by replacing it for the previous node
   this.tail = this.tail.prev;
 
   // this.tail.prev can be null, and if so, this.tail will also be null
-  if (this.tail) {
-    // Now the new tail shouldn't have a next Node
-    this.head.next = null;
-  } else {
-    // If the new tail "doesn't exist", then it means the LinkedList is empty, so we need to update the head as well
+  if (!this.tail) {
+    // Now the new head should also be set to null
     this.head = null;
   }
 
@@ -115,63 +109,50 @@ Main.prototype.pop = function() {
   return oldTail.value;
 };
 
-// Return Node of the first value match
-Main.prototype.getNode = function(value) {
-  // Start at the head
-  let currentNode = this.head;
-
-  while (currentNode) {
-    // Test of the value inputted is the same as the current Node value
-    if (value === currentNode.value) {
-      return currentNode;
-    }
-
-    // If progressing to the next node, we make the current node the same as the next node
-    // So for example, if we wanted to move 2 Nodes forwards, we would to currentNode.next.next
-    currentNode = currentNode.next;
-  }
-
-  // It doesn't exist
-  return null;
-};
-
 // Return the index of the value in the LinkedList
-Main.prototype.index = function(value) {
+Main.prototype.getValues = function(value) {
   // Start at the head
   let currentNode = this.head;
+
+  let values = [];
 
   for (let index = 0; currentNode; index++) {
-    // Test of the value inputted is the same as the current Node value
-    if (value === currentNode.value) {
-      // Return the index of the loop
-      return index;
-    }
+    // Push the values on the array to return later
+    values.push(currentNode.value);
 
     // If progressing to the next node, we make the current node the same as the next node
     // So for example, if we wanted to move 2 Nodes forwards, we would to currentNode.next.next
     currentNode = currentNode.next;
   }
 
-  // It doesn't exist
-  return null;
+  // Return the array
+  return values;
 };
 
 // Tests
 const newList = new Main();
 
-newList.push(10);
+newList.unshift("World");
+newList.unshift("Hello");
+
+newList.push(1234);
+
+newList.push({
+  something: "oops"
+});
 newList.pop();
+newList.push({
+  something: "yolo"
+});
 
-newList.push(5);
+console.log(newList.getValues());
+console.log(newList.length);
 
-newList.unshift(4);
-
-console.log(newList.index(10));
-console.log(newList.index(4));
-console.log(newList.index(5));
-
-/* This should output:
- * null
- * 0 (because unshift adds to head)
- * 1 (comes after because push adds to tail)
+/* Output:
+  ["Hello", "World", 1234, Object]
+  0: "Hello"
+  1: "World"
+  2: 1234
+  3: Object
+    something: "yolo"
  */
