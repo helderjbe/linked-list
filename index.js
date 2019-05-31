@@ -146,7 +146,7 @@ newList.push({
 });
 
 console.log(newList.getValues());
-console.log(newList.length);
+console.log('Length: ' + newList.length);
 
 /* Output:
   ["Hello", "World", 1234, Object]
@@ -155,4 +155,5 @@ console.log(newList.length);
   2: 1234
   3: Object
     something: "yolo"
+  Length: 4
  */
