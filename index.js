@@ -91,7 +91,7 @@ Main.prototype.pop = function() {
     return null;
   }
 
-  // Capture the current head node to return it later
+  // Capture the current tail node to return it later
   const oldTail = this.tail;
 
   // "Remove" the current tail by replacing it for the previous node
