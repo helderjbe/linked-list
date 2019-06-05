@@ -66,8 +66,8 @@ Main.prototype.shift = function() {
     return null;
   }
 
-  // Capture the current head node
-  const oldHead = Object.assign({}, this.head);
+  // Capture the current head node to return it later
+  const oldHead = this.head;
 
   // "Remove" the current head by replacing it for the next node
   this.head = this.head.next;
@@ -91,8 +91,8 @@ Main.prototype.pop = function() {
     return null;
   }
 
-  // Capture the current tail node
-  const oldTail = Object.assign({}, this.tail);
+  // Capture the current head node to return it later
+  const oldTail = this.tail;
 
   // "Remove" the current tail by replacing it for the previous node
   this.tail = this.tail.prev;
