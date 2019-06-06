@@ -72,8 +72,8 @@ Main.prototype.shift = function() {
   // "Remove" the current head by replacing it for the next node
   this.head = this.head.next;
 
-  // this.head.next can be null, and if so, this.head will also be null
-  if (!this.head) {
+  // If the next element is null, the list is empty, and so we should update the tail
+  if (!this.head.next) {
     // Now the new tail should also be set to null
     this.tail = null;
   }
@@ -97,9 +97,9 @@ Main.prototype.pop = function() {
   // "Remove" the current tail by replacing it for the previous node
   this.tail = this.tail.prev;
 
-  // this.tail.prev can be null, and if so, this.tail will also be null
-  if (!this.tail) {
-    // Now the new head should also be set to null
+  // If the prev element is null, the list is empty, and so we should update the head
+  if (!this.tail.prev) {
+    // Now the new tail should also be set to null
     this.head = null;
   }
 
